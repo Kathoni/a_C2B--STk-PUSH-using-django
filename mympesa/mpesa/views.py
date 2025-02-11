@@ -38,13 +38,13 @@ def mpesa_payment(request):
             stk_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
             headers = {"Authorization": f"Bearer {access_token}", "Content-Type": "application/json"}
             payload = {
-                "BusinessShortCode": business_shortcode,
+                "BusinessShortCode": '0111725146' ,
                 "Password": password,
                 "Timestamp": timestamp,
                 "TransactionType": "CustomerPayBillOnline",
                 "Amount": amount,
                 "PartyA": phone,
-                "PartyB": business_shortcode,
+                "PartyB": '0111725146',
                 "PhoneNumber": phone,
                 "CallBackURL": "https://yourdomain.com/callback",  # Replace with your actual callback URL
                 "AccountReference": "Game Payment",
