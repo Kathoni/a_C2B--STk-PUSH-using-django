@@ -18,8 +18,10 @@ from django.urls import path
 from mpesa import views
 
 
+
 urlpatterns = [
     path('index/', views.index , name='index'),
+    path('payments/mpesa/pay/', views.mpesa_payment, name='mpesa_pay'),
 
 
 ]

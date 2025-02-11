@@ -1,10 +1,145 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>C2B</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C2B - Pay to Play Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #game-container {
+            display: none;
+            position: relative;
+            width: 400px;
+            height: 400px;
+            border: 2px solid black;
+            margin: auto;
+            background-color: lightgray;
+        }
+        #target {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
 
-    </head>
-    <body>
-        <h1>Home Page</h1>
-    </body>
-</html>
+    <h1>Welcome to the Pay-to-Play Game</h1>
+    <p>Enter your phone number and pay via M-Pesa to play!</p>
+
+    <input type="text" id="phone-number" placeholder="Enter Safaricom Number (07XXXXXXXX or 01XXXXXXXX)">
+    <button id="pay-btn" class="btn">Pay KES 10 via M-Pesa</button>
+
+    <div id="game-container">
+        <p>Click the red target as many times as possible in 10 seconds!</p>
+        <div id="target"></div>
+        <p>Score: <span id="score">0</span></p>
+        <p id="timer">Time Left: 10s</p>
+    </div>
+
+    <script>
+        let score = 0;
+        let timeLeft = 10;
+        let gameInterval;
+        
+        const payButton = document.getElementById("pay-btn");
+        const phoneNumberInput = document.getElementById("phone-number");
+        const gameContainer = document.getElementById("game-container");
+        const target = document.getElementById("target");
+        const scoreDisplay = document.getElementById("score");
+        const timerDisplay = document.getElementById("timer");
+
+        // Handle M-Pesa Payment
+        payButton.addEventListener("click", async function() {
+            const phoneNumber = phoneNumberInput.value.trim();
+            
+            // ✅ Updated Validation for 07XXXXXXXX and 01XXXXXXXX
+            if (!phoneNumber.match(/^(07\d{8}|01\d{8})$/)) {
+                alert("Please enter a valid Safaricom number (07XXXXXXXX or 01XXXXXXXX).");
+                return;
+            }
+
+            payButton.textContent = "Processing Payment...";
+            payButton.disabled = true;
+
+            try {
+                const response = await fetch("http://127.0.0.1:8000/mpesa/pay/", {  
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ phone: phoneNumber, amount: 10 }),
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    alert("Payment successful! You can now play.");
+                    phoneNumberInput.style.display = "none";
+                    payButton.style.display = "none";
+                    gameContainer.style.display = "block";
+                    startGame();
+                } else {
+                    alert("Payment failed. Try again.");
+                    payButton.textContent = "Pay KES 10 via M-Pesa";
+                    payButton.disabled = false;
+                }
+            } catch (error) {
+                console.error("Payment error:", error);
+                alert("Payment request failed. Check your internet connection.");
+                payButton.textContent = "Pay KES 10 via M-Pesa";
+                payButton.disabled = false;
+            }
+        });
+
+        // Start the Game
+        function startGame() {
+            score = 0;
+            timeLeft = 10;
+            scoreDisplay.textContent = score;
+            timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+
+            function moveTarget() {
+                const x = Math.floor(Math.random() * 350);
+                const y = Math.floor(Math.random() * 350);
+                target.style.left = x + "px";
+                target.style.top = y + "px";
+            }
+
+            target.addEventListener("click", function() {
+                score++;
+                scoreDisplay.textContent = score;
+                moveTarget();
+            });
+
+            moveTarget();
+
+            gameInterval = setInterval(function() {
+                timeLeft--;
+                timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+
+                if (timeLeft === 0) {
+                    clearInterval(gameInterval);
+                    alert(`Time's up! Your score is ${score}`);
+                    location.reload();
+                }
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>  
