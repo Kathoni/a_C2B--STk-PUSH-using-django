@@ -18,5 +18,4 @@ Sends an STK Push request to the M-Pesa API.
 Tech Stack
 Django (Backend)
 HTML/CSS & JavaScript (Frontend)
-M-Pesa Daraja API (Payments)
-Let me know if you need further refinements! 🚀
+M-Pesa Daraja API (Payments) 🚀
