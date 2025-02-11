@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mpesa',
+    'rest_framework',
+    'django_daraja',
+
 ]
 
 MIDDLEWARE = [
@@ -74,12 +78,15 @@ WSGI_APPLICATION = 'mympesa.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+     'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'c2b-stk push',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',  # Change if using remote DB
+        'PORT': '3306',
 }
-
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
