@@ -1,4 +1,4 @@
-#C2B STK Push Using Django
+# C2B STK Push Using Django
 This project demonstrates how to integrate M-Pesa STK Push (Daraja API) into a simple game using Django. The workflow ensures that users must make a payment before they can access the game.
 
 Workflow

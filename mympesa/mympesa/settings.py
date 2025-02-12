@@ -128,3 +128,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+PESA_ENVIRONMENT = 'sandbox'
+MPESA_CONSUMER_KEY = '5kjxDgZpyrOJhdYDIGrgmSUg4vG5tN2oCdumoBTkRWPoSqWv'
+MPESA_CONSUMER_SECRET ='X47GaqUtat7tbAGOUg83LJrt4I8qVhmgksAwjCoqVdcNidnHGchliepTsiTlO0Kk'
+MPESA_SHORTCODE =''
+MPESA_EXPRESS_SHORTCODE ='0111725146'
+MPESA_SHORTCODE_TYPE =''
+MPESA_PASSKEY ='bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
+MPESA_INITIATOR_USERNAME ='testapi'
+MPESA_INITIATOR_SECURITY_CREDENTIALS ='Safaricom999!*!'

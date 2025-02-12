@@ -21,7 +21,7 @@ from mpesa import views
 
 urlpatterns = [
     path('index/', views.index , name='index'),
-    path('payments/mpesa/pay/', views.mpesa_payment, name='mpesa_pay'),
+    path('payments/mpesa/pay/', views.mpesa_pay, name='mpesa_pay'),
 
 
 ]

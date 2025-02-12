@@ -42,8 +42,8 @@
     <h1>Welcome to the Pay-to-Play Game</h1>
     <p>Enter your phone number and pay via M-Pesa to play!</p>
 
-    <input type="text" id="phone-number" placeholder="Enter Safaricom Number (07XXXXXXXX or 01XXXXXXXX)">
-    <button id="pay-btn" class="btn">Pay KES 10 via M-Pesa</button>
+    <input type="text" id="phone-number" placeholder="Enter Safaricom Number">
+    <button id="pay-btn" class="btn" style="display: block; margin: 20px auto; padding: 15px;">Pay KES 10 via M-Pesa</button>
 
     <div id="game-container">
         <p>Click the red target as many times as possible in 10 seconds!</p>
@@ -51,6 +51,53 @@
         <p>Score: <span id="score">0</span></p>
         <p id="timer">Time Left: 10s</p>
     </div>
+    <style>
+         #phone-number {
+    width: 100%;
+    max-width: 320px;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #008000; /* M-Pesa Green */
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    text-align: center;
+  }
+
+  #phone-number::placeholder {
+    color: #666;
+    font-size: 14px;
+  }
+
+  #phone-number:focus {
+    border-color: #006400; /* Darker Green */
+    box-shadow: 0 0 8px rgba(0, 128, 0, 0.5);
+  }
+        #pay-btn {
+          display: block;
+          margin: 20px auto;
+          padding: 15px 30px;
+          font-size: 16px;
+          font-weight: bold;
+          color: #fff;
+          background-color: #008000; /* M-Pesa Green */
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background-color 0.3s, transform 0.2s;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+      
+        #pay-btn:hover {
+          background-color: #006400; /* Darker Green */
+          transform: scale(1.05);
+        }
+      
+        #pay-btn:active {
+          background-color: #004d00; /* Even Darker Green */
+          transform: scale(0.98);
+        }
+      </style>
 
     <script>
         let score = 0;
